@@ -49,8 +49,8 @@ sorting=nyt,
 \newtheorem*{flashbang}{FlashBang Principle}
 \newtheorem*{Lefschetz}{Lefschetz theorem}
 \newtheorem*{hyp}{Hypothesis}
-\theoremstyle{definition}
-%\newtheorem{dfn}[thm]{Definition}
+%\theoremstyle{definition}
+\newtheorem{dfn}{Definition}
 %\newtheorem{exx}[thm]{Example}
 \theoremstyle{remark}
 %\newtheorem{rem}[thm]{Remark}
@@ -138,8 +138,18 @@ The role of physical coordinates in GR is very controversial. Since the work of 
 
 
 
-\section{Dold-Thom, Sweepouts, and Optimal Transportation}
-In the article [ref] we develop further applications of OT to algebraic topology, and especially the problem of constructing sweepouts and homology cycles via solutions to OT programs. Our starting point is the greatest theorem you've probably never heard of, namely Dold-Thom's theorem. If $X$ is topological space, and $G$ is finitely-generated abelian group, then the Dold-Thom group is the kernel $AG_0(X;G):=\ker(\epsilon)$ of the augmentation map $$\epsilon: G(X) \to G,$$ defined by $\epsilon(\sum' g_x .x)=\sum' g_x$. Therefore $AG_0(X;G)$ consists of all finitely-supported $G$-valued distributions on $X$ with zero net sum (i.e. mean zero). Here $\emptyset$ represents the constant $0$-valued distribution on $X$. The vacuum state $\emptyset$ serves as canonical basepoint on $AG_0(X)$.
+\section{Sweepouts and Optimal Transportation}
+Henceforth we assume $X$ is a complete finite dimensional Riemannian manifold, possibly noncompact, with Riemannian metric $g$, and source measure $\sigma$ on $X$ proportional to the volume measure $vol_X$. For applications we suppose $X$ is a fixed source space. Let $Y$ be a $k$-dimensional target Riemannian space, with target measure $\tau<<vol_Y$. We assume $\int_X \sigma \geq \int_Y \tau$, and say the source is abundant with respect to the target. We allow the target $Y$ to be variable, as we discuss below.
+
+
+
+\subsection{Dold-Thom Theorem}
+In the article [ref] we develop further applications of OT to algebraic topology, and especially the problem of constructing sweepouts and homology cycles via solutions to OT programs. Our starting point is a version of Dold-Thom's theorem. 
+
+\begin{dfn} If $X$ is topological space, and $G$ is finitely-generated abelian group, then the Dold-Thom group is the kernel $AG_0(X;G):=\ker(\epsilon)$ of the augmentation map $\epsilon: G(X) \to G,$ defined by $\epsilon(\sum' g_x .x)=\sum' g_x$. 
+\end{dfn}
+
+Therefore $AG_0(X;G)$ consists of all finitely-supported $G$-valued distributions on $X$ with zero net sum (zero net charge). Here $\emptyset$ represents the constant $0$-valued distribution on $X$. The vacuum state $\emptyset$ serves as canonical basepoint on $AG_0(X)$.
 
 \begin{thm}[Dold-Thom]
 The singular reduced homology functor $X\mapsto \tilde{H}_*(X;G)$ is naturally equivalent to the functor of $\emptyset$-pointed homotopy groups $X\mapsto \pi_*(AG_0(X;G), \emptyset)$.
@@ -149,65 +159,74 @@ The singular reduced homology functor $X\mapsto \tilde{H}_*(X;G)$ is naturally e
 If $Y$ is a Moore space, e.g. $Y=\mathbb{S}^q$ is a $q$-sphere, then $AG_0(Y;G)$ is a model of an Eilenberg-Maclane classifying space $K(G,q)$.
 \end{cor}
 
-According to the obstruction methods of Steenrod, Eilenberg, Maclane, it follows that there is a natural equivalence between free homotopy classes $[X, AG_0(Y;G)]$ and singular cohomology groups $H^q(X;G)$. This leads us to the following topological problem: 
+According to the obstruction methods of Steenrod, Eilenberg, Maclane, it follows that there is a natural equivalence between free homotopy classes $[X, AG_0(Y;G)]$ and singular cohomology groups $H^q(X;G)$. Thus Dold-Thom allows the construction of cohomology cycles via the construction of topologically nontrivial maps $X\to AG_0(Y;G)$ whenever $H^q(X;G)\neq 0$. This leads us to a general topological problem: 
 
 \begin{prob}
 \label{dt1}
-Construct and classify homotopically nontrivial continuous maps $$f: X \to AG_0(Y)$$ for given topological space $X$ and $q$-sphere $Y=\mathbb{S}^q$.
+Construct and classify homotopically nontrivial continuous maps $$f: X \to AG_0(Y)$$ for given topological space $X$ and $q$-sphere $Y=\mathbb{S}^q$ whenever $H^q(X)\neq 0$. 
 
 For example, construct and classify continuous maps $f: \Sigma^2_g \to AG_0(\mathbb{S}^1)$, where $\Sigma_g^2$ is a connected Riemann surface.
 \end{prob}
 
-Remark. If $f$ is a continuous map solving \ref{dt1}, then regular fibres $f^{-1}(pt)$, where $pt$ represents a distribution on $Y$, are cycles in $X$. These cycles are nontrivial whenever $f$ is homotopically nontrivial, [ref].
-
-%It is already interesting problem to construct nontrivial continuous maps $f: \Sigma_g^2 \to AG_0(\mathbb{S}^1; \bZ)$, where $\Sigma_g^2$ represents a closed genus $g$ orientable surface. 
+Maps $f$ solving Problem \ref{dt1} generate homological cycles on $X$. The argument is described in R. Kirby's book \cite{kirby}. If $f$ is a continuous map solving \ref{dt1}, then regular fibres $f^{-1}(pt)$, where $pt$ represents a distribution on $Y$, are cycles in $X$. These cycles are nontrivial whenever $f$ is homotopically nontrivial, and even Poincar\'e dual to the cocycle generated by $f$ (assuming $X$ is compact oriented, and $Y$ is a Moore space).
 
 %The nature of $AG_0$ implies that such continuous maps are ``multi-valued"  and with net neutral point images. 
 
-Evidently the group $AG_0(Y)$ can be viewed as a discretized version of the subspace $H$ of $L^2(Y)$ consisting of all measurable functions $f$ satisfying $\int_Y 1. f=0$. Thus $H=1^{\perp}$ is the orthogonal complement to the subspace of constant functions. Likewise we are replacing the set of Borel-Radon measures $\mathscr{M}(X\times Y)_{\geq 0}$ with the set of signed Borel-Radon measures having zero total measure $\int 1. d\mu(x) =0$.
+%The topological abelian group $AG_0(Y)$ is a discretization of the subspace $H$ of $L^2(Y)$ consisting of measurable functions $f$ satisfying $\int_Y 1. f=0$. Thus $H=1^{\perp}$ is the orthogonal complement to the subspace of constant functions on $Y$. 
 
-From the viewpoint of OT, it is necessary to first construct interesting costs $c$ between the a given source space $X$ and the space of distributions on spheres.
+For applications of optimal transport, it is necessary to first construct interesting costs $c$ between a given source space $X$ and the space of distributions on spheres. 
 
 \begin{prob} 
-(Discrete Version) Construct and classify geometric costs $c$ associated with correlating probability measure $\sigma$ on $X$ and probability measures $\tau$ on $AG_0(\mathbb{S}^q)$;
+Construct and classify natural geometric costs $c$ associated with correlating probability measure $\sigma$ on $X$ and probability measures $\tau$ on $AG_0(\mathbb{S}^q)$.
 
-(Continuous Version) Construct and classify the natural costs $c$ associated with correlating probability measures $\sigma$ on $X$ and probability measures $\tau$ on the orthogonal subspace $H$? 
+%(Continuous Version) Construct and classify the geometric costs $c$ associated with correlating probability measures $\sigma$ on $X$ and probability measures $\tau$ on the orthogonal subspace $H$? 
 \end{prob}
 
-To be more specific about the meaning of ``natural" costs: we say a cost is natural if it represents a reasonable interaction energy between a unit source mass at $x$ and a unit target mass at $y$. We allow the possibility -- as experience shows us -- of the interaction energy $c(x,y)$ depending on the relative positions of $x,y$ relative to the target measure $\tau$. In this case the interaction energy has a Machian type interpretation. The costs should also satisfy some basic regularity assumptions. See [ref]. 
+What is a natural geometric cost? We say a cost is natural if it represents a reasonable interaction energy between a unit source mass at $x$ and a unit target mass at $y$. We allow the possibility -- as experience shows us -- of the interaction energy $c(x,y)$ depending on the relative positions of $x,y$ relative to the target measure $\tau$. In this case the interaction energy has a Machian type interpretation. The costs should also satisfy some basic regularity assumptions. See [ref]. To fix ideas, it is already interesting problem to construct interesting costs between a surface $\Sigma_g^2$ and, say, $AG_0(S^1)$.
 
 
 
 \subsection{Sweepouts and OT}
 
-Fix a source space $(X, \sigma)$. Concretely we assume $X$ is Riemannian, with metric $g$, and source measure $\sigma=vol_X$ equal to canonical volume measure (modulo scalars). Let $Y$ be a $k$-dimensional target Riemannian space, with target measure $\tau<<vol_Y$. We assume $\int_X \sigma \geq \int_Y \tau$, and say the source is abundant with respect to the target. To begin the study of optimal transports from source to target, we require a choice of cost function $c: X\times Y \to \bR$. For our geometric applications, it is convenient to make the following assumptions on $c$: 
+To begin the study of optimal transport from source $(X,\sigma)$ to targets $(Y,\tau)$, we require a choice of cost function $c: X\times Y \to \bR$. For geometric applications it is convenient to make the following assumptions on $c$: 
 
-(A0)
+\begin{itemize}
+\item[\textbf{(A0)}]\emph{(Continuous, positive, coercive)} The cost $c$ is continuous on $dom(c) \subset X\times Y$, and nonnegative $c(x,y)\geq 0$. Moreover we assume $x\mapsto c(x,y)$ is \emph{coercive} for every $y\in Y$, i.e. the sublevels $\{x\in X~|~ c(x,y) \leq t\}$ are compact subsets of $X$ for every $t\in \bR$, and $y\in Y$.  
 
-(A1)
 
-(A2)
+\item[\textbf{(A1)}]\emph{(Uniformly $C^2$ in source variable)} The cost is twice continuously differentiable with respect to the source variable $x$, uniformly in $y$ throughout $dom(c)$. So for every $y\in Y$, the Hessian $x\mapsto \nabla_{xx}^2 c(x,y)$ exists and is continuous throughout $dom(c(\cdot, y))$. 
 
-(A3)
+\item[\textbf{(A2)}]\emph{(Jointly weak $C^1$)} The function $(x,y)\mapsto ||\nabla_x c(x,y)||$ is upper semicontinuous throughout $dom(c)$. So for every $t\in \bR$ the superlevel set $\{ ||\nabla_x c(x,y)|| \geq t\}$ is a closed subset of $dom(c)$. 
 
-In our thesis [ref] we compared and contrasted the properties of attractive costs, e.g. $c=d^2/2$ when $Y\subset X$, with a repulsive costs. The recent article [McCann--Kim] has studied interaction potentials which have the form. Another interesting alternative is via Weber's potentials $V$, as discussed by AKTA (c.f. W.E.Weber's completed works).
+\item[\textbf{(A3)}]\emph{(Nonconstant on open subsets)} For every $y\in Y$, we assume $x'\mapsto \nabla_x c(x',y)$ does not vanish identically on any open subset of $dom(c_y)$.  
 
-%A priori it is difficult to construct costs $c$ between spaces $X,Y$ which exist in totally different universes. In otherwords, the transport has no transportation path between them, and the prices of sale $-\psi(y)$ and delivery $\psi^c(x)$ cannot be observed, except if there is some instaneous teleportation between the points of sale and delivery. 
+%For every Radon measure $\sigma$ on the source $X$ and $y\in Y$, the single-variable function $t \mapsto \sigma[\{c_y< t\}]$ is strictly monotone-increasing for $t\in supp(c_y\# \sigma) \subset \bR$. 
 
-Practically, the author finds the best results are obtained when the target $Y$ is given as a subset of the source, or say by some canonical embedding $Y\hookrightarrow X$. Interesting applications arise when $Y=\del X[t]$, where $X[t] \subset X$ is a ``rational excision" of $X$. 
+% The cost satisfies \textbf{(Mono)}\label{mon} A cost $c: X\times Y\to \bR\cup \{+\infty\}$ is monotone with respect to a source measure $\sigma$ if for every $y\in Y$, 
 
-Attractive costs measure the interaction energies of oppositely charged particles on the source and target, e.g. when source has all negative charges, and target has exclusively positive charges. 
+\item[\textbf{(A4)}]\emph{(Twisted on source)} The cost satisfies (Twist) condition with respect to the source variable throughout $dom(c)$: for every $x'\in X$ the rule $y\mapsto \nabla_x c(x',y)$ defines an injective mapping $dom(c_{x'}) \to T_{x'} X$. 
 
-The repulsive costs represent the interaction energies of negative source charges to negative target charges. Given a cost $c$ satisfying the assumptions (A), we obtain a contravariant functor $Z: 2^Y \to 2^X$ defined by $Z(Y_I):=\cap_{y\in Y_I} \sub$, where $\psi=\psi^{cc}$ is the Kantorovich potential maximizing the dual program. Our hypotheses on $c$ imply the cells $Z(y)$ are $(n-k)$-dimensional cycles in $X$ for almost every point $y\in Y$.. In other words, the OT program defined by the data $(\sigma, \tau, c)$ generates -- via Kantorovich duality -- a \emph{nontrivial contravariant functor} $Z: 2^Y \to 2^X$. And as we vary $y$ over the target $(Y, \tau)$, restricting the functor $Z$ to the singletons $Y \hookrightarrow 2^Y$, we obtain $Y$-parameter measurable family of closed subsets $Z(y)$ on $X$. Our proposal is $y\mapsto Z(y)$ is an interesting ``measure-sweepout". Our idea is that these maps are actually topological sweepouts continuous in the necessary topologies. Explicitly, this requires proving: if $y_0, y_1$ are sufficiently close in $Y$, then the cycles $Z(y_0)$ and $Z(y_1)$ bound a Lipschitz chain of small area, i.e. there exists a chain $C$ such that $\del C = Z(y_1)-Z(y_0)$ and $C$ has arbitrarily small area.
+\item[\textbf{(A5)}]\emph{($C^1$ in target variable)}\label{A+} For every $x\in X$, the function $y\mapsto c(x,y)$ is continuously differentiable; and for every $y\in Y$, the gradients $\nabla_y c(x,y)$ are bounded on compact subsets $K\subset X$.
+\end{itemize}
+
+For simplicity, the reader can assume that $c\in C^2(X\times Y)$ and that (Twist) is satisfed on source (A4).  
+
+In our thesis [ref] we compared the properties of \emph{attractive} costs, e.g. the quadratic geodesic cost $c(x,y)=d(x,y)^2/2$ when $Y\subset X$, with the class of so-called \emph{repulsive costs}. Heuristically, the attractive costs represents interaction energies between oppositely charged positive source and and negatively charged target configurations. The repulsive cost represents interaction energies between, say, positive source and positive target configurations. We recall that ``opposite charges attract" and "like charges repel", hence the terminology. 
+
+%The recent article [McCann--Kim] has studied interaction potentials which have the form. Another interesting alternative is via Weber's potentials $V$, as discussed by AKTA (c.f. W.E.Weber's completed works).
+
+\`A priori, it is difficult to construct costs $c$ between spaces $X, Y$ which occupy different spaces, and which have no spatial relations. Without a transport path between points $x,y$ it is hard to relate the price of sale $-\psi(y)$ and price of purchase $\psi^c(x)$. Practically speaking, the author finds the best results are obtained when the target $Y$ is given as a subset of the source, or say by some canonical embedding $Y\hookrightarrow X$. Most interesting applications arise when $Y=\del X[t]$, where $X[t] \subset X$ is a ``rational excision" of $X$ (see our thesis [ref:chapter] for illustrations). 
+
+
+Now suppose we have a cost $c$ satisfying the assumptions (A). The OT program defined by the data $(\sigma, \tau, c)$ generates via Kantorovich duality a \emph{nontrivial contravariant functor} $Z: 2^Y \to 2^X$ defined by $Z(Y_I):=\cap_{y\in Y_I} \sub$, where $\psi=\psi^{cc}$ is the Kantorovich potential maximizing the dual program. As we vary $y$ over the target $(Y, \tau)$ -- restricting the functor $Z$ to the singletons $Y \hookrightarrow 2^Y$ -- we obtain $Y$-parameter family of closed subsets $Z(y)$ on $X$. Our hypotheses on $c$ imply the cells $Z(y)$ are $(n-k)$-dimensional subvarieties in $X$ for almost every point $y\in Y$ [ref]. We propose that the parameterization $y\mapsto Z(y)$ defines topological sweepouts, and which are continuous in the necessary topologies. Explicitly, this requires proving: if $y_0, y_1$ are sufficiently close in $Y$, then the cycles $Z(y_0)$ and $Z(y_1)$ bound a Lipschitz chain of small area, i.e. there exists a chain $C$ such that $\del C = Z(y_1)-Z(y_0)$ and $C$ has arbitrarily small area. This also requires proving that the cycles $Z(y)$, $y\in Y$, assemble to the fundamental class $[X]$ of the source space. 
 
 
 \begin{prob}
 \label{alm}
-Given a source space $(X, \sigma)$, study costs $c$ and target spaces $(Y, \tau)$ for which the $Y$-parameter family of subsets $Z(y)$ defines topological sweepouts of the source. More concretely, under the assumptions (A), prove the $Y$-parameter family of cycles $Z$ is continuous in Almgren's flat topology on chains. 
+Given a source space $(X, \sigma)$, construct and study costs $c$ and target spaces $(Y, \tau)$ for which the $Y$-parameter family of subsets $y\mapsto Z(y)$ defines topological sweepouts of the source $X$. More concretely, under the assumptions (A), prove the $Y$-parameter family of cycles $Z$ is continuous in Almgren's flat chain topology. 
 \end{prob}
-%A positive solution of Problem \ref{alm} implies the $Y$-parameter family of cycles can be viewed as a continuous topological sweepout of $X$. This also requires proving that the cycles $Z(y)$, $y\in Y$, assemble to the fundamental class $[X]$ of the source space. 
 
-Thus we propose using the regularity theory of OT to generate continuous topological objects from the measure theoretic objects arising from Monge-Kantorovich duality. 
+A positive solution of Problem \ref{alm} implies the $Y$-parameter family of cycles can be viewed as a continuous topological sweepout of $X$. Thus we propose using the regularity theory of OT to generate continuous topological objects from the measure theoretic objects arising from Monge-Kantorovich duality. 
 
 \subsection{Application to Guth's Width Inequalities}
 
